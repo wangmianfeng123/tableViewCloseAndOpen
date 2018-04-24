@@ -15,6 +15,9 @@
 		2BDE3DBA208F60C10090E2E2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE3DB9208F60C10090E2E2 /* main.m */; };
 		2BDE3DC4208F60C10090E2E2 /* tableViewCloseAndOpenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE3DC3208F60C10090E2E2 /* tableViewCloseAndOpenTests.m */; };
 		2BDE3DCF208F60C10090E2E2 /* tableViewCloseAndOpenUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE3DCE208F60C10090E2E2 /* tableViewCloseAndOpenUITests.m */; };
+		2BDE3DDF208F63360090E2E2 /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE3DDD208F63360090E2E2 /* TableViewCell.m */; };
+		2BDE3DE0208F63360090E2E2 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2BDE3DDE208F63360090E2E2 /* TableViewCell.xib */; };
+		2BDE3DE6208F6A3E0090E2E2 /* headerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDE3DE5208F6A3E0090E2E2 /* headerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +54,11 @@
 		2BDE3DCA208F60C10090E2E2 /* tableViewCloseAndOpenUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = tableViewCloseAndOpenUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BDE3DCE208F60C10090E2E2 /* tableViewCloseAndOpenUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tableViewCloseAndOpenUITests.m; sourceTree = "<group>"; };
 		2BDE3DD0208F60C10090E2E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BDE3DDC208F63360090E2E2 /* TableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
+		2BDE3DDD208F63360090E2E2 /* TableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
+		2BDE3DDE208F63360090E2E2 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		2BDE3DE4208F6A3E0090E2E2 /* headerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = headerView.h; sourceTree = "<group>"; };
+		2BDE3DE5208F6A3E0090E2E2 /* headerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = headerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +118,11 @@
 				2BDE3DB5208F60C10090E2E2 /* LaunchScreen.storyboard */,
 				2BDE3DB8208F60C10090E2E2 /* Info.plist */,
 				2BDE3DB9208F60C10090E2E2 /* main.m */,
+				2BDE3DDC208F63360090E2E2 /* TableViewCell.h */,
+				2BDE3DDD208F63360090E2E2 /* TableViewCell.m */,
+				2BDE3DDE208F63360090E2E2 /* TableViewCell.xib */,
+				2BDE3DE4208F6A3E0090E2E2 /* headerView.h */,
+				2BDE3DE5208F6A3E0090E2E2 /* headerView.m */,
 			);
 			path = tableViewCloseAndOpen;
 			sourceTree = "<group>";
@@ -236,6 +249,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BDE3DB7208F60C10090E2E2 /* LaunchScreen.storyboard in Resources */,
+				2BDE3DE0208F63360090E2E2 /* TableViewCell.xib in Resources */,
 				2BDE3DB4208F60C10090E2E2 /* Assets.xcassets in Resources */,
 				2BDE3DB2208F60C00090E2E2 /* Main.storyboard in Resources */,
 			);
@@ -263,6 +277,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BDE3DAF208F60C00090E2E2 /* ViewController.m in Sources */,
+				2BDE3DDF208F63360090E2E2 /* TableViewCell.m in Sources */,
+				2BDE3DE6208F6A3E0090E2E2 /* headerView.m in Sources */,
 				2BDE3DBA208F60C10090E2E2 /* main.m in Sources */,
 				2BDE3DAC208F60C00090E2E2 /* AppDelegate.m in Sources */,
 			);
