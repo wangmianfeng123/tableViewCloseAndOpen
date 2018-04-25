@@ -8,12 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
-@interface headerView : UIView
+
+@protocol headerViewDelegate <NSObject>
+
+- (void)headerViewIndex:(NSInteger)index btn:(UIButton *)btn;
+
+@end
 
 
+@interface headerView : UITableViewHeaderFooterView
 
-+(UIView *)headerView;
+@property (nonatomic,assign)NSInteger section;
 
+@property (nonatomic,strong)NSMutableDictionary * dict;
+
+@property (nonatomic,weak)id<headerViewDelegate>delegate;
+
+-(void)headerView;
 
 
 @end

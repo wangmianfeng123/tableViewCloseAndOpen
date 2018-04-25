@@ -10,12 +10,15 @@
 #import "TableViewCell.h"
 #import "headerView.h"
 
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource,headerViewDelegate,btnDelegate>
 {
     NSArray *_arr;
     NSMutableDictionary *_dict;
+    NSMutableDictionary *_seleDict;
 }
 @property (nonatomic,strong)UITableView * tableView;
+
+@property (assign, nonatomic) NSIndexPath *selectedIndexPath;//单选，当前选中的行
 
 @end
 
@@ -24,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _dict = [NSMutableDictionary dictionary];
-   
+    _seleDict = [NSMutableDictionary dictionary];
     _arr = @[@"王绵峰",@"fengzi",@"疯子"];
     [self.view addSubview:self.tableView];
     
@@ -41,6 +44,7 @@
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
         [_tableView registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"cellId"];
+        [_tableView registerClass:[headerView class] forHeaderFooterViewReuseIdentifier:@"headerId"];
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -50,9 +54,15 @@
 
 
 
-- (void)tapAction:(UITapGestureRecognizer *)gesture{
-    NSInteger key = gesture.view.tag;
-    NSString * keyStr = [NSString stringWithFormat:@"%ld",(long)key];
+- (void)headerViewIndex:(NSInteger)index btn:(UIButton *)btn{
+//    UIButton * bt = btn;
+    [self headerSelectedIndex:index];
+}
+
+
+
+- (void)headerSelectedIndex:(NSInteger)index{
+    NSString * keyStr = [NSString stringWithFormat:@"%ld",(long)index];
     NSString * value = [_dict objectForKey:keyStr];
     if ([value isEqualToString:@"0"]) {
         NSLog(@"打开");
@@ -61,10 +71,26 @@
         NSLog(@"关闭");
         [_dict setValue:@"0" forKey:keyStr];
     }
-    NSIndexSet * set = [[NSIndexSet alloc] initWithIndex:gesture.view.tag];
+    NSIndexSet * set = [[NSIndexSet alloc] initWithIndex:index];
     [self.tableView reloadSections:set withRowAnimation:UITableViewRowAnimationAutomatic];
     NSLog(@"点击header");
 }
+
+
+
+
+- (void)btnArr:(NSArray *)btnArr index:(NSInteger)index{
+//        for (int j = 0; j < btnArr.count; j++) {
+//            UIButton * bnt = btnArr[j];
+//            if (bnt.tag == index) {
+//                bnt.selected = YES;
+//            }else{
+//                bnt.selected = NO;
+//            }
+//        }
+}
+
+
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -85,13 +111,19 @@
     return nil;
 }
 
+
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
-        UIView * view = [headerView headerView];
-        view.tag = section;
-           UITapGestureRecognizer * gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [view addGestureRecognizer:gesture];
-        return view;
+    headerView * headerView = [tableView dequeueReusableHeaderFooterViewWithIdentifier:@"headerId"];
+//        UIView * view = [headerView headerView];
+    headerView.delegate = self;
+    headerView.section = section;
+    [headerView setDict:_dict];
+        return headerView;
+    
 }
+
+
 
 
 
@@ -121,9 +153,30 @@
 
 
 
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        TableViewCell * cell = [tableView cellForRowAtIndexPath:_selectedIndexPath];
+        [cell.btn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        cell.delegate = self;
+        cell.selectedIndexPath = indexPath;
+        //记录当前选中的位置索引
+        _selectedIndexPath = indexPath;
+        TableViewCell * selectedCell = [tableView cellForRowAtIndexPath:indexPath];
+        selectedCell.delegate = self;
+        [selectedCell.btn setBackgroundImage:[UIImage imageNamed:@"三角向上"] forState:UIControlStateNormal];
+    }
+}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     TableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cellId" forIndexPath:indexPath];
-             cell.textLable.text = _arr[indexPath.row];
+        cell.textLable.text = _arr[indexPath.row];
+    cell.delegate = self;
+    [cell.btn setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    if (_selectedIndexPath == indexPath) {
+        [cell.btn setBackgroundImage:[UIImage imageNamed:@"三角向上"] forState:UIControlStateNormal];
+    }
     return cell;
 }
 
